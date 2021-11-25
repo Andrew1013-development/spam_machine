@@ -1,23 +1,31 @@
-import pyautogui 
+import pyautogui
 import keyboard
+import psutil
 import time
 import os
-import psutil
-import notify2
 
 
 duplication = bool()
 spam_string = str()
 timeout = None
+
 print("What do you want to spam people with?")
 spam = input("")
+print("Time between messages?")
+time_between_message = input("")
+if float(time_between_message) / 1 == 0:
+    time_between_message = int(time_between_message)
+else :
+    time_between_message = float(time_between_message)
 print("Do you want to duplicate the spam text into a big string?")
-print("Type True to confirm or False to bypass this.")
+print("Type (True) to confirm, (False) to bypass this, or (elando) to go into developer mode (add a counter to the string)")
 e = input("Choice : ")
 if e =="True" or e == "true" or e == "TRUE" :
     duplication = True
-else :
-    duplication = False 
+elif e == "False" or e == "false" or e == "FALSE" :
+    duplication = False
+elif e == "elando" or e == "ELANDO" :
+    sus = True
 time.sleep(0.2)
 if duplication == True :
     print("How many times do you want to duplicate? please type a number less than or equal 30 lol.")
@@ -57,7 +65,11 @@ time.sleep(2)
 os.system('cls')
 print("OK get ready for spam galore boi!")
 time.sleep(1.2)
-for i in range(0,n+1) :
+for i in range(1,n+1) :
+    if sus == True :
+        spam_string = spam + " " + str(i)
+    else :
+        spam_string = spam
     #check for cpu usage 1
     cpu_percent = psutil.cpu_percent()
     if cpu_percent < 60.0 :
@@ -69,7 +81,7 @@ for i in range(0,n+1) :
             timeout = cpu_percent / 100 - 0.3
     # main code of the spam
     pyautogui.typewrite(spam_string)
-    time.sleep(0.1)
+    time.sleep(time_between_message)
     pyautogui.press("enter")
     time.sleep(timeout)
     i += 1
