@@ -1,4 +1,5 @@
-#spam machine ver2.1
+#spam machine ver2.2
+#added stop limit using cpu limit
 #author : Andrew 1013
 
 import pyautogui
@@ -8,9 +9,10 @@ import time
 import os
 
 duplication = bool()
+sus = bool()
 spam_string = str()
 timeout = None
-
+cpu_too_high = 0
 print("What do you want to spam people with?")
 spam = input("")
 print("Time between messages?")
@@ -128,10 +130,15 @@ try :
         else :
             if cpu_percent >= 97.0 :
                 print("CPU usage too high!")
+                cpu_too_high += 1
             else :
                 timeout = cpu_percent / 100 - 0.3
         i += 1
+        if cpu_too_high >= 10 :
+            pyautogui.typewrite("say goodnight")
+            pyautogui.press('enter')
+            print("goodnight")
+            exit()
 except KeyboardInterrupt :
     print("emergency exit")
     exit()
-    
