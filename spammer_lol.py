@@ -1,9 +1,11 @@
+#spam machine ver2.1
+#author : Andrew 1013
+
 import pyautogui
 import keyboard
 import psutil
 import time
 import os
-
 
 duplication = bool()
 spam_string = str()
@@ -13,12 +15,15 @@ print("What do you want to spam people with?")
 spam = input("")
 print("Time between messages?")
 time_between_message = input("")
+
 if float(time_between_message) / 1 == 0:
     time_between_message = int(time_between_message)
 else :
     time_between_message = float(time_between_message)
+
 print("Do you want to duplicate the spam text into a big string?")
 print("Type (True) to confirm, (False) to bypass this, or (elando) to go into developer mode (add a counter to the string)")
+
 e = input("Choice : ")
 if e =="True" or e == "true" or e == "TRUE" :
     duplication = True
@@ -26,6 +31,22 @@ elif e == "False" or e == "false" or e == "FALSE" :
     duplication = False
 elif e == "elando" or e == "ELANDO" :
     sus = True
+else :
+    print("you sus")
+    duplication = False
+    sus = False
+
+print("Do you want to test spam it on the CLI (command line interface) first?")
+print("Type (True) to confirm, (False) to bypass this")
+e = input("Choice : ")
+if e =="True" or e == "true" or e == "TRUE" :
+    cli_test = True
+elif e == "False" or e == "false" or e == "FALSE" :
+    cli_test = False
+else :
+    print("you sus")
+    cli_test = False
+
 time.sleep(0.2)
 if duplication == True :
     print("How many times do you want to duplicate? please type a number less than or equal 30 lol.")
@@ -48,6 +69,7 @@ if duplication == True :
         exit()
 else :
     spam_string = spam
+
 print("How many times do you want to spam people?")
 n = int(input(""))
 print("Caution!")
@@ -58,44 +80,58 @@ print("")
 print("Ok done!")
 print("Press N to confirm.")
 keyboard.wait('n')
+if cli_test == True :
+    print("CLI test first")
+    for i in range(1,n+1) :
+        if sus == True :
+            spam_string = spam + " " + str(i)
+        else :
+            spam_string = spam
+        print(spam_string)
+        i += 1
+else :
+    pass
+print("Press E to confirm cleared and ready for spamming")
+keyboard.wait('e')  
 print("You have 5 seconds to go to your preferred website for the spam machine")
 time.sleep(5)
-print("To stop in an emergency, press E")
+print("To stop in an emergency, press Ctrl + C")
 time.sleep(2)
 os.system('cls')
 print("OK get ready for spam galore boi!")
 time.sleep(1.2)
-for i in range(1,n+1) :
-    if sus == True :
-        spam_string = spam + " " + str(i)
-    else :
-        spam_string = spam
-    #check for cpu usage 1
-    cpu_percent = psutil.cpu_percent()
-    if cpu_percent < 60.0 :
-        timeout = 0.01 
-    else :
-        if cpu_percent >= 97.0 :
-            print("CPU usage too high!")
+try :
+    for i in range(1,n+1) :
+        if sus == True :
+            spam_string = spam + " " + str(i)
         else :
-            timeout = cpu_percent / 100 - 0.3
-    # main code of the spam
-    pyautogui.typewrite(spam_string)
-    time.sleep(time_between_message)
-    pyautogui.press("enter")
-    time.sleep(timeout)
-    i += 1
-    #check for cpu usage 2
-    cpu_percent = psutil.cpu_percent()
-    if cpu_percent < 60.0 :
-        timeout = 0.01 
-    else :
-        if cpu_percent >= 97.0 :
-            print("CPU usage too high!")
+            spam_string = spam
+        #check for cpu usage 1
+        cpu_percent = psutil.cpu_percent()
+        if cpu_percent < 60.0 :
+            timeout = 0.01 
         else :
-            timeout = cpu_percent / 100 - 0.3
-    #emergency execution code
-    if keyboard.is_pressed("e") == True :
-        exit()
-    else :
-        continue
+            if cpu_percent >= 97.0 :
+                print("CPU usage too high!")
+            else :
+                timeout = cpu_percent / 100 - 0.3
+        # main code of the spam
+        pyautogui.typewrite(spam_string)
+        time.sleep(time_between_message)
+        pyautogui.press("enter")
+        time.sleep(timeout)
+        i += 1
+        #check for cpu usage 2
+        cpu_percent = psutil.cpu_percent()
+        if cpu_percent < 60.0 :
+            timeout = 0.01 
+        else :
+            if cpu_percent >= 97.0 :
+                print("CPU usage too high!")
+            else :
+                timeout = cpu_percent / 100 - 0.3
+        i += 1
+except KeyboardInterrupt :
+    print("emergency exit")
+    exit()
+    
