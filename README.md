@@ -9,7 +9,7 @@ Version 3.0 beta 1 (coming soon):
 2. remove time_between_message manual input, instead relying on CPU usage to determine time_between_message
 3. added time for execution measurement (available in developer mode) (used for both version 2.3 and 3.0 beta 1)
 
-Version 2.3 (coming soon) :
+Version 2.3 :
 1. added execution time measurement (available in development mode)
 
 Version 2.2:
