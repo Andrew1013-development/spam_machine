@@ -22,3 +22,6 @@ Version 2.1:
 
 Version 2:
 - Added "developer mode", which can be triggered by typing "elando" into the command line interface (CLI) while executing the .py source code file.
+
+Version 1 to 1.2 :
+Changelog lost (version 1.0 in GitHub was version 3 of the project in motion offline)
