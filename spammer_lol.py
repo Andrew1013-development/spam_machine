@@ -1,5 +1,5 @@
-#spam machine ver2.2
-#added stop limit using cpu limit
+#spam machine ver2.3
+#added execution time measurement (available in development mode)
 #author : Andrew 1013
 
 import pyautogui
@@ -8,9 +8,9 @@ import psutil
 import time
 import os
 
-duplication = bool()
-sus = bool()
-spam_string = str()
+duplication = False
+sus = False
+spam_string = ""
 timeout = None
 cpu_too_high = 0
 print("What do you want to spam people with?")
@@ -102,7 +102,9 @@ time.sleep(2)
 os.system('cls')
 print("OK get ready for spam galore boi!")
 time.sleep(1.2)
+
 try :
+    start = time.time()
     for i in range(1,n+1) :
         if sus == True :
             spam_string = spam + " " + str(i)
@@ -141,4 +143,14 @@ try :
             exit()
 except KeyboardInterrupt :
     print("emergency exit")
+    end = time.time()
+    time_executed = end - start
+    if sus == True :
+        print("time used for execution : {}".format(time_executed))
     exit()
+finally :
+    end = time.time()
+    time_executed = end - start
+    if sus == True :
+        print("time used for execution : {}".format(time_executed))
+        
