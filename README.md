@@ -1,7 +1,10 @@
 # spam_machine
 The source code for a spamming script, using pyautogui, written in Python 3.10.0rc2
 
-Version 3.0 beta 1 (coming soon):
+Version 3.0 beta 2 (coming soon)
+1. added functionality for spamming 2 different messages in order from string1 to string2 only
+
+Version 3.0 beta 1 :
 1. rewrite code to shorten code complexity and reduce memory consumption
    - Shorten code complexity / source code file size
    - Reduce CPU / memory consumption
