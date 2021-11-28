@@ -13,11 +13,11 @@ The source code for a spamming script, using pyautogui, written in Python 3.10.0
 - GitHub : Issues tab on the repository page
 
 ## changelog
-Version 3.0 beta 2 (coming soon)
+Version 3.0 beta 2 (coming soon) :
 1. added basic functionality for spamming 2 different messages in order (from string1 to string2) only
    - full functionailty will come in version 3.0 beta 3 (read "some notices" for more details)
 
-Version 3.0 beta 1 :
+Version 3.0 beta 1 (newest version) :
 1. rewrite code to
    - Shorten code complexity / source code file size
    - Reduce CPU / memory consumption
@@ -25,7 +25,7 @@ Version 3.0 beta 1 :
 2. remove time_between_message manual input, instead relying on CPU usage to determine time_between_message
 3. added time for execution measurement (available in developer mode) (used for both version 2.3 and 3.0 beta 1)
 
-Version 2.3 (will be deprecated when version 3 stable is released) :
+Version 2.3 (newest stable version) :
 1. added execution time measurement (available in development mode)
 
 Version 2.2:
