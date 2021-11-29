@@ -2,8 +2,8 @@
 The source code for a spamming script, using pyautogui, written in Python 3.10.0rc2
 
 ## some notices :
-- The author (Andrew1013) is busy with his endterm tests and getting back to school so the release of Version 3.0 beta 2 and beta 3 will be delayed.
-- I'll still try to work on Version 3.0 beta 2 and beta 3 while doing my tests if i have time, but expect some delay.
+- The author (Andrew1013) is busy with his endterm tests and getting back to school so the release of Version 3.0 beta 3 will be delayed.
+- I'll still try to work on Version 3.0 beta 3 while doing my tests if i have time, but expect some delay.
 - If you have any issues, post it on the Issues tab in the GitHub page or contact me at Discord via DMs (read "contact me" section for more details)
 - If you want to participate in this project, contact me at Discord via DMs or via my emails (read "contact me" section for more details)
 
