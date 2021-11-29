@@ -16,6 +16,7 @@ The source code for a spamming script, using pyautogui, written in Python 3.10.0
 ## changelog
 Version 3.0 beta 3 (the newest version) :
 1. added more functionality for spamming 2 different messages, still in order (from string1 to string2) only
+2. added Command Line Interface (CLI) test for 2 strings functionality
 
 Version 3.0 beta 2 :
 1. added basic functionality for spamming 2 different messages in order (from string1 to string2) only
