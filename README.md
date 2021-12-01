@@ -1,5 +1,8 @@
-# spammer_lol.py
+# spammer_lol.py / spammer_lol_beta.py
 The source code for a spamming script, using pyautogui, written in Python 3.10.0rc2
+Current newest :
+- Stable version : Version 2.3
+- Released version : Version 3.0 beta 3
 
 ## some notices :
 - The author (Andrew1013) is busy with his endterm tests and getting back to school so the release of Version 3.0 beta 4 will be delayed.
