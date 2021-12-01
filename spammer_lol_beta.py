@@ -1,12 +1,21 @@
-#version 3.0 beta 3
-#added more functionailty for spamming 2 different messages
+#version 3.0 beta 4
+#added the ability to self-install the modules if it's missing
 #author Andrew1013
 
+#import pip (this will never be ded)
 import pyautogui
 import keyboard
 import psutil
 import time
 import os
+
+module_list = ["pyautogui","keyboard","psutil","time","os"]
+for ele in module_list :
+    try:       
+        __import__(ele)        
+    except ImportError as e:
+        os.system('pip install {}'.format(ele))
+    print("module {} installed!".format(ele))
 
 #function lines
 def cli_test1(spam_string,n,developer_mode) :
@@ -150,6 +159,16 @@ try :
 except KeyboardInterrupt :
     print("emergency exit")
     end = time.time()
+    time_executed = round(end - start,2)
+    if sus == True :
+        print("time used for execution : {} seconds".format(time_executed))
+    exit()
+finally :
+    end = time.time()
+    time_executed = round(end - start,2)
+    if sus == True :
+        print("time used for execution : {} seconds".format(time_executed))
+
     time_executed = round(end - start,2)
     if sus == True :
         print("time used for execution : {} seconds".format(time_executed))
