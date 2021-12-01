@@ -18,7 +18,7 @@
 
 ## changelog
 Version 3.0 beta 4 (coming soon) :
-1. (changelog unclear)
+1. added the ability to self-install the modules if it's missing
 
 Version 3.0 beta 3 (the newest version) :
 1. added more functionality for spamming 2 different messages, still in order (from string1 to string2) only
