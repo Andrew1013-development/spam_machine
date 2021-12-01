@@ -2,11 +2,11 @@
 - The source code for a spamming script, using pyautogui, written in Python 3.10.0rc2
 - Current newest version :
   - Stable version : Version 2.3
-  - Released version : Version 3.0 beta 3
+  - Released version : Version 3.0 beta 4
 
 ## some notices :
-- The author (Andrew1013) is busy with his endterm tests and getting back to school so the release of Version 3.0 beta 4 will be delayed.
-- I'll still try to work on Version 3.0 beta 4 and beta 5 while doing my tests if i have time, but expect some delay.
+- The author (Andrew1013) is busy with his endterm tests and getting back to school so the release of Version 3.0 beta 5 will be delayed.
+- I'll still try to work on Version 3.0 beta 5 and beta 6 while doing my tests if i have time, but expect some delay.
 - I expect to wrap up the testing phase of Version 3 betas in January of 2022, but it is subjected to change
 - If you have any issues, post it on the Issues tab in the GitHub page or contact me at Discord via DMs (read "contact me" section for more details)
 - If you want to participate in this project, contact me at Discord via DMs or via my emails (read "contact me" section for more details)
@@ -17,10 +17,10 @@
 - GitHub : Issues tab on the repository page
 
 ## changelog
-Version 3.0 beta 4 (coming soon) :
+Version 3.0 beta 4 (the newest versiom) :
 1. added the ability to self-install the modules if it's missing
 
-Version 3.0 beta 3 (the newest version) :
+Version 3.0 beta 3 :
 1. added more functionality for spamming 2 different messages, still in order (from string1 to string2) only
 2. added Command Line Interface (CLI) test for 2 strings functionality
 
