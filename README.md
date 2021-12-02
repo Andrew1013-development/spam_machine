@@ -21,6 +21,7 @@ Version 3.0 beta 5 (the newest version) :
 1. Added functionality to generate 2 strings of random letters
    - Either on-demand or fixed (generate once before the spamming)
 2. Added functionality for second string spamming
+3. A slight change to timing (timing code integrated into the functions instead of the driver code)
 
 Version 3.0 beta 4 (the newest version) :
 1. added the ability to self-install the modules if it's missing
