@@ -1,5 +1,7 @@
-#version 3.0 beta 4
-#added the ability to self-install the modules if it's missing
+#version 3.0 beta 5
+#Added functionality to generate 2 strings of random letters (on-demand or fixed)
+#Added functionality for second string spamming
+#timing code integrated into the functions instead of the driver code
 #author Andrew1013
 
 #import pip (this will never be ded)
@@ -8,6 +10,9 @@ import keyboard
 import psutil
 import time
 import os
+import random
+import string
+
 
 module_list = ["pyautogui","keyboard","psutil","time","os"]
 for ele in module_list :
@@ -15,18 +20,48 @@ for ele in module_list :
         __import__(ele)        
     except ImportError as e:
         os.system('pip install {}'.format(ele))
-    print("module {} installed!".format(ele))
+        print("module {} installed!".format(ele))
+module_list = None
 
 #function lines
-def cli_test1(spam_string,n,developer_mode) :
+def string1_randgen(length) : #random generator for 1 string
+    string1 = ""
+    for i in range(1,length+1) :
+        string1 += random.choice(string.ascii_letters)
+        i += 1
+    return string1
+
+def string2_randgen(length1,length2) : #random generator for 2 strings
+    string1 = ""
+    string2 = ""
+    for i in range(1,length1+1) :
+        string1 += random.choice(string.ascii_letters)
+        i += 1
+    for i in range(1,length2+1) :
+        string2 += random.choice(string.ascii_letters)
+        i += 1
+    return string1,string2
+
+def cli_test1(spam_string,n,developer_mode,on_demand_rand,rand_len) : #cli test for 1 string
     for i in range(1,n+1) :
-        if developer_mode == True : print(spam_string + " {}".format(i))
-        else : print(spam_string)
+        if on_demand_rand == True : 
+            spam_string = string1_randgen(rand_len)
+        else : pass
+
+        if developer_mode == True : 
+            print(spam_string + " {}".format(i))
+        else : 
+            print(spam_string)
         i += 1
     return 0
 
-def cli_test2(spam_string1,spam_string2,n,developer_mode) : 
+def cli_test2(spam_string1,spam_string2,n,developer_mode,on_demand_rand,rand_len1) : #cli test for 2 string
     for i in range(1,n+1) :
+        if on_demand_rand == True :
+            spam_string1,spam_string2 = string2_randgen(rand_len1)
+        else :
+            pass
+
         if developer_mode == True : 
             print(spam_string1 + " {}".format(i))
             print(spam_string2 + " {}".format(i))
@@ -36,7 +71,7 @@ def cli_test2(spam_string1,spam_string2,n,developer_mode) :
         i += 1
     return 0
 
-def cpu_check() :
+def cpu_check() : #cpu check to determine timeout
     cpu_percent = psutil.cpu_percent()
     cpu_too_high = 0
     if cpu_percent < 60.0 :
@@ -56,9 +91,15 @@ def cpu_check() :
     else :
         return timeout
 
-def spam1(spam_string,n,developer_mode) :
+def spam1(spam_string,n,developer_mode,on_demand_rand,rand_len) : #spam for 1 string
+    start = time.time()
     for i in range(1,n+1) :
         timeout = cpu_check()
+        if on_demand_rand == True :
+            spam_string = string1_randgen(rand_len)
+        else :
+            pass
+
         if developer_mode == True : 
             pyautogui.typewrite(spam_string + " {} \n".format(i))
         else : 
@@ -67,11 +108,18 @@ def spam1(spam_string,n,developer_mode) :
         pyautogui.press("enter")
         timeout = cpu_check()
         i += 1
-    return 0
+    end = time.time()
+    return round(end - start,2)
 
-def spam2(spam_string1,spam_string2,n,developer_mode) :
+def spam2(spam_string1,spam_string2,n,developer_mode,on_demand_rand,rand_len1) : #spam for 2 string
+    start = time.time()
     for i in range(1,n+1) :
         timeout = cpu_check()
+        if on_demand_rand == True :
+            spam_string1,spam_string2 = string2_randgen(rand_len1)
+        else :
+            pass
+        
         if developer_mode == True :
             pyautogui.typewrite(spam_string1 + " {} \n".format(i))
             pyautogui.typewrite(spam_string2 + " {} \n".format(i))
@@ -82,22 +130,60 @@ def spam2(spam_string1,spam_string2,n,developer_mode) :
         pyautogui.press("enter")
         timeout = cpu_check()
         i += 1
-    return 0
+    end = time.time()
+    return round(end - start,2)
 
 #variable inputs
-duplication = False
-sus = False
-print("What do you want to spam people with?")
-spam_string1 = input("message : ")
-print("Do you want to spam with a secon message?")
-second_spam = input("Choice : ")
-if second_spam == "yes" or second_spam == "YES" :
-    print("What do you want to spam people for the second message with?")
-    spam_string2 = input("message : ")
-else : pass
+duplication,sus,second_spam  = False,False,False
+spam_string1,spam_string2 = "",""
+rand_len1,rand_len2 = 0,0
+print("Do you want to randomly generate a message or 2?")
+print("Type (Yes) to accept and type (No) to cancel")
+string1_rand = input("choice : ")
+if string1_rand == "Yes" or string1_rand == "YES" or string1_rand == "yes" : string1_rand = True
+else : string1_rand = False
+
+if string1_rand == True :
+    print("Do you want to randomly generate a second message?")
+    print("Type (Yes) to accept and type (No) to cancel")
+    string2_rand = input("choice : ")
+    if string2_rand == "Yes" or string2_rand == "YES" or string2_rand == "yes" : string2_rand = True
+    else : string2_rand = False
+    
+    print("Do you want to generate new strings on-demand or generate once?")
+    print("Type (Yes) to generate a new string on-demand and (No) to generate once only")
+    on_demand_rand = input("choice : ")
+    if on_demand_rand == "Yes" or on_demand_rand == "yes" or on_demand_rand == "YES" : on_demand_rand = True
+    else : on_demand_rand = False
+    
+    print("Length for the generation of string1?")
+    rand_len1 = int(input("value : "))
+    if string2_rand == True :
+        print("Length for the generation of string2?")
+        rand_len2 = int(input("value : "))
+
+    if on_demand_rand == False and string1_rand == True : 
+        spam_string1 = string1_randgen(rand_len1)
+    elif on_demand_rand == False and string2_rand == True : 
+        spam_string1,spam_string2 = string2_randgen(rand_len1,rand_len2)
+    else : 
+        pass
+else :
+    print("What do you want to spam people with?")
+    spam_string1 = input("message : ")
+    print("Do you want to spam with a second message?")
+    print("Type (Yes) to accept or (No) to bypass")
+    second_spam = input("Choice : ")
+    if second_spam == "yes" or second_spam == "YES" or second_spam == "Yes":
+        second_spam = True
+        print("What do you want to spam people for the second message with?")
+        spam_string2 = input("message : ")
+    else : second_spam = False
+
 print("How many times do you want to spam?")
 n = int(input("number : "))
 print("Do you want to duplicate the 2 spam texts into 2 big strings?")
+print("Note : if you want to duplicate your string, you will have to settle for generating for once only.")
 print("Type (True) to confirm, (False) to bypass this, or (elando) to go into developer mode (add a counter to the string)")
 e = input("Choice : ")
 if e =="True" or e == "true" or e == "TRUE" : duplication = True
@@ -108,12 +194,19 @@ else :
     duplication = False
     sus = False
 if duplication == True :
-    print("How much do you want to duplicate the string?")
-    duplication_times = int(input(""))
-    while duplication_times > 0 :
-        spam_string1 = "{} {}".format(spam_string1)
-        spam_string2 = "{} {}".format(spam_string2)
-        duplication_times -= 1
+    on_demand_rand = False
+    print("How much do you want to duplicate for string1?")
+    duplication_times1 = int(input("value : "))
+    print("How much do you want to duplicate for string2?")
+    duplication_times2 = int(input("value : "))
+    
+    while duplication_times1 > 0 :
+        spam_string1 += spam_string1
+        duplication_times1 -= 1
+    while duplication_times2 > 0 :
+        spam_string2 += spam_string2
+        duplication_times2 -= 1
+    
 print("Do you want to test spam it on the CLI (command line interface) first?")
 print("Type (True) to confirm, (False) to bypass this")
 e = input("Choice : ")
@@ -131,12 +224,13 @@ print("")
 print("Ok done!")
 print("Press N to confirm.")
 keyboard.wait('n')
+print()
 if cli_Test == True : 
     print("CLI Test first")
-    if second_spam == True :
-        cli_test2(spam_string1,spam_string2,n,sus)
-    else :
-        cli_test1(spam_string1,n,sus)
+    if second_spam == True : 
+        cli_test2(spam_string1,spam_string2,n,sus,on_demand_rand,rand_len1)
+    else : 
+        cli_test1(spam_string1,n,sus,on_demand_rand,rand_len1)
 print("Press E to confirm cleared and ready for spamming")
 keyboard.wait('e')  
 print("You have 5 seconds to go to your preferred website for the spam machine")
@@ -146,35 +240,12 @@ time.sleep(2.0)
 os.system('cls')
 print("OK get ready for spam galore boi!")
 time.sleep(1.2)
-try :
-    start = time.time()
-    if second_spam == "yes" or second_spam == "YES" :
-        spam2(spam_string1,spam_string2,n,sus)
-    else :
-        spam1(spam_string1,n,sus)
-    end = time.time()
-    time_executed = round(end - start,2)
-    if sus == True :
-        print("time used for execution : {} seconds".format(time_executed))
-except KeyboardInterrupt :
+try :    
+    if second_spam == "yes" or second_spam == "YES" or second_spam == "Yes": time_executed = spam2(spam_string1,spam_string2,n,sus,on_demand_rand,rand_len1)
+    else : time_executed = spam1(spam_string1,n,sus,on_demand_rand,rand_len1)
+    
+    if sus == True : print("time for execution : {} seconds".format(time_executed))
+except :
     print("emergency exit")
-    end = time.time()
-    time_executed = round(end - start,2)
-    if sus == True :
-        print("time used for execution : {} seconds".format(time_executed))
+    if sus == True : print("time for execution : {} seconds".format(time_executed))
     exit()
-finally :
-    end = time.time()
-    time_executed = round(end - start,2)
-    if sus == True :
-        print("time used for execution : {} seconds".format(time_executed))
-
-    time_executed = round(end - start,2)
-    if sus == True :
-        print("time used for execution : {} seconds".format(time_executed))
-    exit()
-finally :
-    end = time.time()
-    time_executed = round(end - start,2)
-    if sus == True :
-        print("time used for execution : {} seconds".format(time_executed))
