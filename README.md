@@ -17,7 +17,7 @@
 - GitHub : Issues tab on the repository page
 
 ## changelog
-Version 3.0 beta 4 (the newest versiom) :
+Version 3.0 beta 4 (the newest version) :
 1. added the ability to self-install the modules if it's missing
 
 Version 3.0 beta 3 :
