@@ -1,5 +1,5 @@
-#spam machine ver2.4
-#added the ability to self-install the modules if it's missing
+#spam machine ver2.5
+#bug fixes for self-installing modules function (introduced in Version 3.0 beta 5 and Version 2.4)
 #author : Andrew 1013
 
 import pyautogui
@@ -9,14 +9,19 @@ from time import sleep,time
 import os
 
 module_list = ["pyautogui","keyboard","psutil","time","os"]
+module_missing = False
 for ele in module_list :
     try:       
-        __import__(ele)
-        print("module {} does exist".format(ele))        
+        __import__(ele)   
     except ImportError as e:
+        module_missing = True
         os.system('pip install {}'.format(ele))
         print("module {} installed!".format(ele))
-module_list = None
+if module_missing == True :
+    print("restart the program to use it")
+    exit()
+else :
+    pass
 
 duplication = False
 sus = False
