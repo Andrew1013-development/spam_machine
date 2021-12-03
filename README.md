@@ -1,7 +1,7 @@
 # spammer_lol.py / spammer_lol_beta.py
 - The source code for a spamming script, using pyautogui, written in Python 3.10.0rc2
 - Current newest version :
-  - Stable version : Version 2.3
+  - Stable version : Version 2.4
   - Released version : Version 3.0 beta 5
 
 ## some notices :
@@ -17,6 +17,9 @@
 - GitHub : Issues tab on the repository page
 
 ## changelog
+Version 2.4 (newest stable version):
+1. added the ability to self-install the modules if it's missing (from Version 3.0 beta 4)
+
 Version 3.0 beta 5 (the newest version) :
 1. Added functionality to generate 2 strings of random letters
    - Either on-demand or fixed (generate once before the spamming)
