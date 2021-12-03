@@ -16,7 +16,7 @@
 - Gmail : viethuytran147@gmail.com / viethuytran123@gmail.com
 - GitHub : Issues tab on the repository page
 
-## changelog
+## changelog (in order from newest to oldest)
 Version 2.4 (newest stable version):
 1. added the ability to self-install the modules if it's missing (from Version 3.0 beta 4)
 
@@ -45,7 +45,7 @@ Version 3.0 beta 1 (the first beta of Version 3.x):
 2. remove time_between_message manual input, instead relying on CPU usage to determine time_between_message
 3. added time for execution measurement (available in developer mode) (used for both version 2.3 and 3.0 beta 1)
 
-Version 2.3 (newest stable version) :
+Version 2.3 :
 1. added execution time measurement (available in development mode)
 
 Version 2.2:
