@@ -1,13 +1,13 @@
 # spammer_lol.py / spammer_lol_beta.py
 - The source code for a spamming script, using pyautogui, written in Python 3.10.0rc2
 - Current newest version :
-  - Stable version : Version 2.4
-  - Released version : Version 3.0 beta 5
+  - Stable version : Version 2.5
+  - Released version : Version 3.0 beta 6
 
 ## some notices :
 - The author (Andrew1013) is busy with his endterm tests and getting back to school so the release of Version 3.0 beta 5 will be delayed.
-- I'll still try to work on Version 3.0 beta 6 and beta 7 while doing my tests if i have time, but expect some delay.
-- I expect to wrap up the testing phase of Version 3 betas in January of 2022 (currently beta 5), but it is subjected to change
+- I'll still try to work on Version 3.0 beta 7 and beta 8 while doing my tests if i have time, but expect some delay.
+- I expect to wrap up the testing phase of Version 3 betas in January of 2022 (currently working on beta 7), but it is subjected to change
 - If you have any issues, post it on the Issues tab in the GitHub page or contact me at Discord via DMs (read "contact me" section for more details)
 - If you want to participate in this project, contact me at Discord via DMs or via my emails (read "contact me" section for more details)
 
@@ -15,9 +15,20 @@
 - Discord : Andrew 1013#3953 / Andrew 1214#3480
 - Gmail : viethuytran147@gmail.com / viethuytran123@gmail.com
 - GitHub : Issues tab on the repository page
+- Facebook : Mark Hay / Huy Thứ Hai
+- YouTube (though not coding channels yet) : RYL Andrew / RYL Andrew 2
 
 ## changelog (in order from newest to oldest)
-Version 2.4 (newest stable version):
+Version 3.0 beta 6 (newest version) :
+1. Bug fixes for self-install functions (introduced in version 3.0 beta 5 and version 2.4)
+2. Statistics report as txt file? (work in progress)
+3. Revamp to the cpu check to get timeout mechanic
+ 
+Version 2.5 (newest stable version):
+1. Bug fixes for self-installing modules function 
+   - this function was introduced first in Version 3.0 beta 5 and Version 2.4)
+
+Version 2.4 :
 1. added the ability to self-install the modules if it's missing (from Version 3.0 beta 4)
 
 Version 3.0 beta 5 (the newest version) :
