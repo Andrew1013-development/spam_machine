@@ -1,7 +1,7 @@
-#version 3.0 beta 5
-#Added functionality to generate 2 strings of random letters (on-demand or fixed)
-#Added functionality for second string spamming
-#timing code integrated into the functions instead of the driver code
+#version 3.0 beta 6
+# Bug fixes for self-install functions (introduced in version 3.0 beta 5 and version 2.4)
+# Statistics report as txt file? (work in progress)
+# A revamp to the cpu check to get timeout mechanic 
 #author Andrew1013
 
 #import pip (this will never be ded)
@@ -10,20 +10,42 @@ import keyboard
 import psutil
 import time
 import os
+import platform
+import sys
 import random
 import string
+import datetime
 
-
-module_list = ["pyautogui","keyboard","psutil","time","os"]
+module_list = ["pyautogui","keyboard","psutil","time","os","platform","sys","string","datetime"]
+module_missing = False
 for ele in module_list :
     try:       
-        __import__(ele)        
+        __import__(ele)   
     except ImportError as e:
+        module_missing = True
         os.system('pip install {}'.format(ele))
         print("module {} installed!".format(ele))
+if module_missing == True :
+    print("restart the program to use it")
+    exit()
+else :
+    pass
+
 module_list = None
 
 #function lines
+def clear_screen() :
+    os.system("cls")
+
+def stats_report() : #statistics reporting (work in progress)
+    version = "v3.0b6"
+    version_type = "beta"
+    os_platform = platform.system()
+    os_name = platform.platform()
+    current_dir = os.getcwd()
+    cpu_percent, timeout = cpu_check()
+    last_run = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+
 def string1_randgen(length) : #random generator for 1 string
     string1 = ""
     for i in range(1,length+1) :
@@ -72,24 +94,14 @@ def cli_test2(spam_string1,spam_string2,n,developer_mode,on_demand_rand,rand_len
     return 0
 
 def cpu_check() : #cpu check to determine timeout
-    cpu_percent = psutil.cpu_percent()
-    cpu_too_high = 0
-    if cpu_percent < 60.0 :
-        timeout = 0.01 
+    cpu_percent = psutil.cpu_percent(interval=0.1)
+    if cpu_percent < 30.0 :
+        timeout = 0.1
+    elif cpu_percent > 90.0 and cpu_percent <= 100.0 :
+        timeout = 1.0
     else :
-        if cpu_percent >= 97.0 :
-            print("CPU usage too high!")
-            cpu_too_high += 1
-        else :
-            timeout = cpu_percent / 100 - 0.3
-    if cpu_too_high == 10 :
-        print("CPU usage too high")
-        pyautogui.typewrite("say goodnight")
-        pyautogui.press('enter')
-        print("goodnight")
-        exit()
-    else :
-        return timeout
+        timeout = round(((cpu_percent-30)/100),3) + 0.1
+    return cpu_percent,timeout
 
 def spam1(spam_string,n,developer_mode,on_demand_rand,rand_len) : #spam for 1 string
     start = time.time()
@@ -133,6 +145,7 @@ def spam2(spam_string1,spam_string2,n,developer_mode,on_demand_rand,rand_len1) :
     end = time.time()
     return round(end - start,2)
 
+clear_screen()
 #variable inputs
 duplication,sus,second_spam  = False,False,False
 spam_string1,spam_string2 = "",""
@@ -237,7 +250,7 @@ print("You have 5 seconds to go to your preferred website for the spam machine")
 time.sleep(5.0)
 print("To stop in an emergency, press Ctrl + C")
 time.sleep(2.0)
-os.system('cls')
+clear_screen()
 print("OK get ready for spam galore boi!")
 time.sleep(1.2)
 try :    
@@ -249,3 +262,6 @@ except :
     print("emergency exit")
     if sus == True : print("time for execution : {} seconds".format(time_executed))
     exit()
+
+#watch some Jenny Huynh son
+#link : https://www.youtube.com/watch?v=I7epHzh0q_w
