@@ -1,12 +1,22 @@
-#spam machine ver2.3
-#added execution time measurement (available in development mode)
+#spam machine ver2.4
+#added the ability to self-install the modules if it's missing
 #author : Andrew 1013
 
 import pyautogui
 import keyboard
 import psutil
-import time
+from time import sleep,time
 import os
+
+module_list = ["pyautogui","keyboard","psutil","time","os"]
+for ele in module_list :
+    try:       
+        __import__(ele)
+        print("module {} does exist".format(ele))        
+    except ImportError as e:
+        os.system('pip install {}'.format(ele))
+        print("module {} installed!".format(ele))
+module_list = None
 
 duplication = False
 sus = False
@@ -18,7 +28,7 @@ spam = input("")
 print("Time between messages?")
 time_between_message = input("")
 
-if float(time_between_message) / 1 == 0:
+if float(time_between_message) / 10 == 0:
     time_between_message = int(time_between_message)
 else :
     time_between_message = float(time_between_message)
@@ -121,9 +131,9 @@ try :
                 timeout = cpu_percent / 100 - 0.3
         # main code of the spam
         pyautogui.typewrite(spam_string)
-        time.sleep(time_between_message)
+        sleep(time_between_message)
         pyautogui.press("enter")
-        time.sleep(timeout)
+        sleep(timeout)
         i += 1
         #check for cpu usage 2
         cpu_percent = psutil.cpu_percent()
@@ -143,14 +153,13 @@ try :
             exit()
 except KeyboardInterrupt :
     print("emergency exit")
-    end = time.time()
+    end = time()
     time_executed = end - start
     if sus == True :
         print("time used for execution : {}".format(time_executed))
     exit()
 finally :
-    end = time.time()
+    end = time()
     time_executed = end - start
     if sus == True :
         print("time used for execution : {}".format(time_executed))
-        
