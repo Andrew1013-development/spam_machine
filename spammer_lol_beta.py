@@ -1,4 +1,4 @@
-# version 3.0 beta 7
+# version 3.0 beta 7 (commited again)
 # Added functionality for labeling string during spam operation
 # Added functionality for changing the order of spamming (fixed or randomized)
 # author Andrew1013
