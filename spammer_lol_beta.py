@@ -1,8 +1,7 @@
-#version 3.0 beta 6
-# Bug fixes for self-install functions (introduced in version 3.0 beta 5 and version 2.4)
-# Statistics report as txt file? (work in progress)
-# A revamp to the cpu check to get timeout mechanic 
-#author Andrew1013
+# version 3.0 beta 7
+# Added functionality for labeling string during spam operation
+# Added functionality for changing the order of spamming (fixed or randomized)
+# author Andrew1013
 
 #import pip (this will never be ded)
 import pyautogui
@@ -15,8 +14,9 @@ import sys
 import random
 import string
 import datetime
+import tkinter as tk
 
-module_list = ["pyautogui","keyboard","psutil","time","os","platform","sys","string","datetime"]
+module_list = ["pyautogui","keyboard","psutil","time","os","platform","sys","string","datetime","tkinter"]
 module_missing = False
 for ele in module_list :
     try:       
@@ -37,13 +37,29 @@ module_list = None
 def clear_screen() :
     os.system("cls")
 
+def string_label1(string) :
+    string = "string : " + string
+    return string
+
+def order_change(string1,string2) :
+    string_backup = ""
+    string_backup = string1
+    string1 = string2
+    string2 = string_backup
+    return string1,string2
+
+def string_label2(string1,string2) :
+    string1 = "string1 : " + string1
+    string2 = "string2 : " + string2
+    return string1,string2
+
 def stats_report() : #statistics reporting (work in progress)
     version = "v3.0b6"
     version_type = "beta"
     os_platform = platform.system()
     os_name = platform.platform()
     current_dir = os.getcwd()
-    cpu_percent, timeout = cpu_check()
+    timeout = cpu_check()
     last_run = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
 def string1_randgen(length) : #random generator for 1 string
@@ -77,10 +93,10 @@ def cli_test1(spam_string,n,developer_mode,on_demand_rand,rand_len) : #cli test 
         i += 1
     return 0
 
-def cli_test2(spam_string1,spam_string2,n,developer_mode,on_demand_rand,rand_len1) : #cli test for 2 string
+def cli_test2(spam_string1,spam_string2,n,developer_mode,on_demand_rand,rand_len1,rand_len2) : #cli test for 2 string
     for i in range(1,n+1) :
         if on_demand_rand == True :
-            spam_string1,spam_string2 = string2_randgen(rand_len1)
+            spam_string1,spam_string2 = string2_randgen(rand_len1,rand_len2)
         else :
             pass
 
@@ -101,7 +117,7 @@ def cpu_check() : #cpu check to determine timeout
         timeout = 1.0
     else :
         timeout = round(((cpu_percent-30)/100),3) + 0.1
-    return cpu_percent,timeout
+    return timeout
 
 def spam1(spam_string,n,developer_mode,on_demand_rand,rand_len) : #spam for 1 string
     start = time.time()
@@ -123,12 +139,12 @@ def spam1(spam_string,n,developer_mode,on_demand_rand,rand_len) : #spam for 1 st
     end = time.time()
     return round(end - start,2)
 
-def spam2(spam_string1,spam_string2,n,developer_mode,on_demand_rand,rand_len1) : #spam for 2 string
+def spam2(spam_string1,spam_string2,n,developer_mode,on_demand_rand,rand_len1,rand_len2) : #spam for 2 string
     start = time.time()
     for i in range(1,n+1) :
         timeout = cpu_check()
         if on_demand_rand == True :
-            spam_string1,spam_string2 = string2_randgen(rand_len1)
+            spam_string1,spam_string2 = string2_randgen(rand_len1,rand_len2)
         else :
             pass
         
@@ -147,8 +163,8 @@ def spam2(spam_string1,spam_string2,n,developer_mode,on_demand_rand,rand_len1) :
 
 clear_screen()
 #variable inputs
-duplication,sus,second_spam  = False,False,False
-spam_string1,spam_string2 = "",""
+duplication,sus,second_spam,label,on_demand_rand  = False,False,False,False,False
+spam_string1,spam_string2,modify_order,modify_order_random = "","","",""
 rand_len1,rand_len2 = 0,0
 print("Do you want to randomly generate a message or 2?")
 print("Type (Yes) to accept and type (No) to cancel")
@@ -158,10 +174,15 @@ else : string1_rand = False
 
 if string1_rand == True :
     print("Do you want to randomly generate a second message?")
+    print("Note that you can't use the new random order feature when you're only spamming with 1 message")
     print("Type (Yes) to accept and type (No) to cancel")
     string2_rand = input("choice : ")
-    if string2_rand == "Yes" or string2_rand == "YES" or string2_rand == "yes" : string2_rand = True
-    else : string2_rand = False
+    if string2_rand == "Yes" or string2_rand == "YES" or string2_rand == "yes" : 
+        string2_rand = True
+        second_spam = True
+    else : 
+        string2_rand = False
+        second_spam = False
     
     print("Do you want to generate new strings on-demand or generate once?")
     print("Type (Yes) to generate a new string on-demand and (No) to generate once only")
@@ -185,6 +206,7 @@ else :
     print("What do you want to spam people with?")
     spam_string1 = input("message : ")
     print("Do you want to spam with a second message?")
+    print("Note that you can't use the new random order feature when you're only spamming with 1 message")
     print("Type (Yes) to accept or (No) to bypass")
     second_spam = input("Choice : ")
     if second_spam == "yes" or second_spam == "YES" or second_spam == "Yes":
@@ -192,6 +214,22 @@ else :
         print("What do you want to spam people for the second message with?")
         spam_string2 = input("message : ")
     else : second_spam = False
+
+
+print("Do you want to label the strings?")
+print("Type (Yes) to label the strings or (No) to bypass")
+label = input("choice : ")
+if label.lower() == "yes" : 
+    label = True
+else : 
+    label = False
+print("Do you want to change the order of spamming?")
+print("Type (Yes) to accept and (No) to bypass.")
+e2 = input("choice : ")
+if e2.lower() == "yes" :
+    print("Do you want to randomly change the order of spamming or just change it once?")
+    print("Type (fixed) to change the order for once only or (random) to randomly change the order")
+    modify_order = input("choice : ")
 
 print("How many times do you want to spam?")
 n = int(input("number : "))
@@ -238,12 +276,29 @@ print("Ok done!")
 print("Press N to confirm.")
 keyboard.wait('n')
 print()
+
+if modify_order.lower() == "fixed" :
+    spam_string1,spam_string2 = order_change(spam_string1,spam_string2)
+else :
+    pass
+
 if cli_Test == True : 
+    if modify_order.lower() == "random" :
+        modify_order_choice = ["0","1"]
+        modify_order_random = random.choice(modify_order_choice)
+
     print("CLI Test first")
     if second_spam == True : 
-        cli_test2(spam_string1,spam_string2,n,sus,on_demand_rand,rand_len1)
+        if modify_order_random == "1" : 
+            spam_string1,spam_string2 = order_change(spam_string1,spam_string2)   
+        if label == True :
+            spam_string1,spam_string2 = string_label2(spam_string1,spam_string2)
+        cli_test2(spam_string1,spam_string2,n,sus,on_demand_rand,rand_len1,rand_len2)
     else : 
+        if label == True :
+            spam_string1 = string_label1(spam_string1)
         cli_test1(spam_string1,n,sus,on_demand_rand,rand_len1)
+
 print("Press E to confirm cleared and ready for spamming")
 keyboard.wait('e')  
 print("You have 5 seconds to go to your preferred website for the spam machine")
@@ -253,9 +308,22 @@ time.sleep(2.0)
 clear_screen()
 print("OK get ready for spam galore boi!")
 time.sleep(1.2)
+
 try :    
-    if second_spam == "yes" or second_spam == "YES" or second_spam == "Yes": time_executed = spam2(spam_string1,spam_string2,n,sus,on_demand_rand,rand_len1)
-    else : time_executed = spam1(spam_string1,n,sus,on_demand_rand,rand_len1)
+    if modify_order.lower() == "random" :
+        modify_order_choice = ["0","1"]
+        modify_order_random = random.choice(modify_order_choice)
+
+    if second_spam == "yes" or second_spam == "YES" or second_spam == "Yes": 
+        if modify_order_random == "1" : 
+            spam_string1,spam_string2 = order_change(spam_string1,spam_string2)    
+        if label == True :
+            spam_string1,spam_string2 = string_label2(spam_string1,spam_string2)
+        time_executed = spam2(spam_string1,spam_string2,n,sus,on_demand_rand,rand_len1,rand_len2)
+    else : 
+        if label == True :
+            spam_string1 = string_label1(spam_string1)
+        time_executed = spam1(spam_string1,n,sus,on_demand_rand,rand_len1)
     
     if sus == True : print("time for execution : {} seconds".format(time_executed))
 except :
