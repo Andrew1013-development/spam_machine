@@ -1,13 +1,16 @@
 # spammer_lol.py / spammer_lol_beta.py
 - The source code for a spamming script, using pyautogui, written in Python 3.10.0rc2
-- Current newest version :
+- Current versions statistics :
   - Stable version : Version 2.5
   - Released version : Version 3.0 beta 7
+  - Near Deprecation version : Version 2.0
+  - Deprecated version : Version 1.0
 
 ## some notices :
-- The author (Andrew1013) is busy with his endterm tests and getting back to school so the release of Version 3.0 beta 5 will be delayed.
-- I'll still try to work on Version 3.0 beta 7 and beta 8 while doing my tests if i have time, but expect some delay.
-- I expect to wrap up the testing phase of Version 3 betas in January of 2022 (currently working on beta 7), but it is subjected to change
+- The author (Andrew1013) is busy with his endterm tests and school things so the release of Version 3.0 beta 7.1 will be delayed.
+- I'll still try to work on Version 3.0 beta 7.1 and beta 8 while doing my tests if i have time, but expect some delay.
+- I expect to wrap up the testing phase of Version 3 betas in January of 2022 (currently working on beta 7.1), but it is subjected to change.
+- The Version 2.x lineage will end with Version 2.7, moving to the more stable Version 3.0 releases when the Version 3.0 beta phase end.
 - If you have any issues, post it on the Issues tab in the GitHub page or contact me at Discord via DMs (read "contact me" section for more details)
 - If you want to participate in this project, contact me at Discord via DMs or via my emails (read "contact me" section for more details)
 
@@ -19,6 +22,9 @@
 - YouTube (though not coding channels yet) : RYL Andrew / RYL Andrew 2
 
 ## changelog (in order from newest to oldest)
+Version 3.0 beta 7.1 (coming soon) :
+1. Bug fixes for some functions of Version 3.0 beta 7
+
 Version 3.0 beta 7 (newest version)
 1. Added functionality for labeling string during spam operation
 2. Added functionality for changing the order of spamming (fixed or randomized)
@@ -74,5 +80,8 @@ Version 2.1:
 Version 2:
 - Added "developer mode", which can be triggered by typing "elando" into the command line interface (CLI) while executing the .py source code file.
 
-Version 1 to 1.2 :
-Changelog lost (version 1.0 in GitHub was version 3 of the project in motion offline)
+Version 1.0.x to 1.2 :
+- Changelog lost (version 1.0 in GitHub was version 3 of the project in motion offline)
+
+Version 1.0 :
+- Initial release
