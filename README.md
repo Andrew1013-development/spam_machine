@@ -4,7 +4,7 @@
   - Stable version : Version 2.5
   - Released version : Version 3.0 beta 7
   - Near Deprecation version : Version 2.0
-  - Deprecated version : Version 1.0
+  - Deprecated version : Version 1.0, Version 3.0 beta 7
 
 ## some notices :
 - The author (Andrew1013) is busy with his endterm tests and school things so the release of Version 3.0 beta 7.1 will be delayed.
@@ -22,10 +22,8 @@
 - YouTube (though not coding channels yet) : RYL Andrew / RYL Andrew 2
 
 ## changelog (in order from newest to oldest)
-Version 3.0 beta 7.1 (coming soon) :
-1. Bug fixes for some functions of Version 3.0 beta 7
 
-Version 3.0 beta 7 (newest version)
+Version 3.0 beta 7 (deleted, revert to Version 3.0 beta 6)
 1. Added functionality for labeling string during spam operation
 2. Added functionality for changing the order of spamming (fixed or randomized)
 
