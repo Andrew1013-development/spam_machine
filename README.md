@@ -27,7 +27,7 @@ Version 3.0 beta 7 (deleted, revert to Version 3.0 beta 6)
 1. Added functionality for labeling string during spam operation
 2. Added functionality for changing the order of spamming (fixed or randomized)
 
-Version 3.0 beta 6 :
+Version 3.0 beta 6 (the newest version) :
 1. Bug fixes for self-install functions (introduced in version 3.0 beta 5 and version 2.4)
 2. Statistics report as txt file? (work in progress)
 3. Revamp to the cpu check to get timeout mechanic
