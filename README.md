@@ -2,9 +2,9 @@
 - The source code for a spamming script, using pyautogui, written in Python 3.10.0rc2
 - Current versions statistics :
   - Stable version : Version 2.5
-  - Released version : Version 3.0 beta 7
+  - Released version : Version 3.0 beta 6
   - Near Deprecation version : Version 2.0
-  - Deprecated version : Version 1.0, Version 3.0 beta 7
+  - Deprecated version : Version 1.0
 
 ## some notices :
 - The author (Andrew1013) is busy with his endterm tests and school things so the release of Version 3.0 beta 7.1 will be delayed.
@@ -23,7 +23,7 @@
 
 ## changelog (in order from newest to oldest)
 
-Version 3.0 beta 7 (deleted, revert to Version 3.0 beta 6)
+Version 3.0 beta 7 (deprecated)
 1. Added functionality for labeling string during spam operation
 2. Added functionality for changing the order of spamming (fixed or randomized)
 
